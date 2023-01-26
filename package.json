@@ -13,6 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "typescript": "^4.9.4"
+    "@3id/common": "^0.4.1",
+    "@3id/did-provider": "^0.4.1",
+    "@ceramicnetwork/http-client": "^2.7.0",
+    "@ethersproject/hdnode": "^5.7.0",
+    "@metamask/eth-sig-util": "^5.0.2",
+    "@stablelib/sha256": "^1.0.1",
+    "typescript": "^4.9.4",
+    "uint8arrays": "^4.0.3"
   }
 }
