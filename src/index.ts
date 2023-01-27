@@ -16,7 +16,7 @@ const testPrivateKey = "f1cef72665e8822a38b6dd4a21649b26739c7d72336140577bf38a71
 const testTile = "disco-public-user-data-test";
 const testBio = "gm frens! I'm Evin.\n\nI'm so excited you're here, let's dance!";
 
-async function get3ID() {
+export async function get3ID() {
   const message = "Allow this account to control your identity";
   const authSecret = authenticate(message);
   const entropy = sha256.hash(fromString(authSecret.slice(2)));
