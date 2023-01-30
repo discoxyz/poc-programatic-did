@@ -33,7 +33,7 @@ export async function get3ID() {
     provider: threeID.getDidProvider(),
     resolver: {
       ...get3IDResolver(ceramic),
-      ...getKeyResolver(),
+      // ...getKeyResolver(),
     },
   })
 
@@ -69,5 +69,3 @@ function authenticate(message: string) {
   const digest = sha256.hash(signatureBytes);
   return `0x${toString(digest, "base16")}`;
 }
-
-get3ID().then();
