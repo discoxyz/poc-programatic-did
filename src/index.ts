@@ -1,14 +1,12 @@
+import { ThreeIdProvider } from "@3id/did-provider";
+import { getResolver as get3IDResolver } from '@ceramicnetwork/3id-did-resolver';
+import { CeramicClient } from "@ceramicnetwork/http-client";
+import { TileDocument } from "@ceramicnetwork/stream-tile";
 import { personalSign } from "@metamask/eth-sig-util";
 import * as sha256 from "@stablelib/sha256";
-import { mnemonicToSeed, entropyToMnemonic } from "@ethersproject/hdnode";
-import { fromHex } from "@3id/common";
+import { DID } from 'dids';
+import { getResolver as getKeyResolver } from 'key-did-resolver';
 import { fromString, toString } from "uint8arrays";
-import { ThreeIdProvider } from "@3id/did-provider";
-import { getResolver as get3IDResolver } from '@ceramicnetwork/3id-did-resolver'
-import { CeramicClient } from "@ceramicnetwork/http-client";
-import { DID } from 'dids'
-import { TileDocument } from "@ceramicnetwork/stream-tile";
-import { getResolver as getKeyResolver } from 'key-did-resolver'
 
 const testDID = "did:3:kjzl6cwe1jw147x3oysta3ikhvczpiyzktzq5wzx1qeguyjeqis6pqukgt1ldj3"
 const testAccount = "0x3B6F73C70B3487e7Da7efF6bc5c2cE1995E36F8d";
