@@ -6,9 +6,12 @@ import * as sha256 from "@stablelib/sha256";
 import { DID } from "dids";
 import * as readline from "readline";
 import { fromString, toString } from "uint8arrays";
+import { config } from "dotenv";
 
-const testAccount = "0x3B6F73C70B3487e7Da7efF6bc5c2cE1995E36F8d";
-const testPrivateKey = "f1cef72665e8822a38b6dd4a21649b26739c7d72336140577bf38a710540f57e";
+config();
+
+const testAccount = process.env.WALLET_ACCOUNT ?? "";
+const testPrivateKey = process.env.WALLET_KEY ?? "";
 
 function getAuthSecret(key: string) {
   const message = "Allow this account to control your identity";
