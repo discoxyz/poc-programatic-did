@@ -14,8 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "@3id/common": "^0.4.1",
+    "@3id/did-manager": "^0.4.1",
     "@3id/did-provider": "^0.4.1",
     "@ceramicnetwork/3id-did-resolver": "2.3.0",
+    "@ceramicnetwork/blockchain-utils-linking": "^2.15.0",
     "@ceramicnetwork/http-client": "2.7.0",
     "@ceramicnetwork/stream-tile": "2.6.0",
     "@ethersproject/hdnode": "^5.7.0",
@@ -23,6 +25,7 @@
     "@stablelib/sha256": "^1.0.1",
     "dids": "^3.4.0",
     "dotenv": "^16.0.3",
+    "ethers": "^6.6.7",
     "key-did-resolver": "^2.3.0",
     "uint8arrays": "^4.0.3"
   },

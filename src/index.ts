@@ -1,57 +1,33 @@
-import { ThreeIdProvider } from "@3id/did-provider";
 import { getResolver as get3IDResolver } from "@ceramicnetwork/3id-did-resolver";
 import { CeramicClient } from "@ceramicnetwork/http-client";
-import { personalSign } from "@metamask/eth-sig-util";
-import * as sha256 from "@stablelib/sha256";
 import { DID } from "dids";
-import * as readline from "readline";
-import { fromString, toString } from "uint8arrays";
 import { config } from "dotenv";
+import * as readline from "readline";
+import getDidProvider from "./three-id-auth-secret-provider.js";
 
 config();
 
 const testAccount = process.env.WALLET_ACCOUNT ?? "";
 const testPrivateKey = process.env.WALLET_KEY ?? "";
 
-function getAuthSecret(key: string) {
-  const message = "Allow this account to control your identity";
-  const privateKey = Buffer.from(key, "hex");
-
-  // Authenticate
-  const signature = personalSign({
-    privateKey,
-    data: message,
-  });
-
-  const signatureBytes = fromString(signature.slice(2));
-  const digest = sha256.hash(signatureBytes);
-  const digest2 = `0x${toString(digest, "base16")}`;
-  return sha256.hash(fromString(digest2.slice(2)));
-}
 
 async function getDid(walletAccountId: string, privateWalletKey: string) {
-  const authSecret = getAuthSecret(privateWalletKey);
-
   const ceramic = new CeramicClient("https://ceramic-single.disco.xyz");
+  const didProvider = await getDidProvider(walletAccountId, privateWalletKey);
 
-  const threeID = await ThreeIdProvider.create({
-    authId: walletAccountId,
-    authSecret,
-    ceramic,
-    // See the section above about permissions management
-    getPermission: (request) => Promise.resolve(request.payload.paths),
-  });
+  if(didProvider === undefined) throw new Error();
 
   const did = new DID({
-    provider: threeID.getDidProvider(),
+    provider: didProvider,
     resolver: {
       ...get3IDResolver(ceramic),
-      // ...getKeyResolver(),
     },
   });
 
+  
   // Authenticate the DID using the 3ID provider
   await did.authenticate();
+  console.log("Authenticated DID", did.id)
   return did;
 }
 
