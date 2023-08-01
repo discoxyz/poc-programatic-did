@@ -3,7 +3,7 @@ import { CeramicClient } from "@ceramicnetwork/http-client";
 import { DID } from "dids";
 import { config } from "dotenv";
 import * as readline from "readline";
-import getDidProvider from "./three-id-auth-secret-provider.js";
+import getDidProvider from "./did-manager-provider.js";
 
 config();
 
